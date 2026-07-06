@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import PlaceIcon from "@mui/icons-material/Place";
 import StarIcon from "@mui/icons-material/Star";
@@ -6,10 +6,7 @@ import StarIcon from "@mui/icons-material/Star";
 function HotelDetail({ hotel, onBack }) {
   const { name, price, rating, location, description, thumbnail, photos } = hotel;
 
-  // Combine thumbnail and photos array for a complete list of images
   const allPhotos = [thumbnail, ...(photos || [])].filter(Boolean);
-  
-  // State for the currently displayed main photo
   const [activePhoto, setActivePhoto] = useState(allPhotos[0] || thumbnail);
 
   const formattedPrice = Number(price).toLocaleString('en-IN', {
@@ -18,7 +15,6 @@ function HotelDetail({ hotel, onBack }) {
 
   return (
     <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 animate-fade-in bg-white border border-slate-100 shadow-sm rounded-2xl my-8">
-      {/* Breadcrumb Navigation */}
       <button
         onClick={onBack}
         className="inline-flex items-center gap-2 text-sm font-medium text-slate-500 hover:text-blue-600 mb-6 transition-colors cursor-pointer group"
@@ -27,7 +23,6 @@ function HotelDetail({ hotel, onBack }) {
         <span>Back to search results</span>
       </button>
 
-      {/* Header Info */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6 select-none">
         <div>
           <div className="flex items-center gap-2 mb-2">
@@ -57,9 +52,7 @@ function HotelDetail({ hotel, onBack }) {
         </div>
       </div>
 
-      {/* Photos Gallery */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-        {/* Main Photo (Takes 3 columns) */}
         <div className="md:col-span-3 aspect-video sm:aspect-auto sm:h-[400px] w-full rounded-2xl overflow-hidden bg-slate-100 relative group shadow-sm">
           <img
             src={activePhoto}
@@ -68,7 +61,6 @@ function HotelDetail({ hotel, onBack }) {
           />
         </div>
 
-        {/* Thumbnails Sidebar (1 column) */}
         <div className="md:col-span-1 flex md:flex-col overflow-x-auto md:overflow-y-auto md:max-h-[400px] gap-3 pb-2 md:pb-0 scrollbar-thin select-none">
           {allPhotos.map((photo, index) => (
             <button
@@ -90,7 +82,6 @@ function HotelDetail({ hotel, onBack }) {
         </div>
       </div>
 
-      {/* Details Section */}
       <div className="bg-slate-50 p-6 rounded-2xl border border-slate-100">
         <h2 className="text-lg font-bold text-slate-800 mb-4 select-none">
           About the property
